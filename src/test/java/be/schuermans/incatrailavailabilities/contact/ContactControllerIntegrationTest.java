@@ -1,5 +1,7 @@
 package be.schuermans.incatrailavailabilities.contact;
 
+import be.schuermans.incatrailavailabilities.IncaTrailAvailabilitiesApplication;
+import freemarker.template.Template;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,4 +37,5 @@ public class ContactControllerIntegrationTest {
     public void postContact() throws Exception {
         mvc.perform(post("/contact", CONTACT_FORM));
     }
+
 }

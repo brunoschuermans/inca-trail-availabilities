@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 public class ContactForm {
 
     @NotNull
+    private String name;
+    @NotNull
     private String email;
     @NotNull
     private String message;

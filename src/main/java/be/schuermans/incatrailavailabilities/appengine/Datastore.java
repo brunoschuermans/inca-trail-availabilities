@@ -9,6 +9,7 @@ import be.schuermans.incatrailavailabilities.Availabilities;
 import be.schuermans.incatrailavailabilities.CurrentDate;
 import be.schuermans.incatrailavailabilities.NumberOfDays;
 import be.schuermans.incatrailavailabilities.contact.ContactForm;
+import be.schuermans.incatrailavailabilities.contact.ContactFormMapper;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
@@ -24,38 +25,47 @@ import org.springframework.stereotype.Component;
 @Component
 public class Datastore {
 
+    public static String AVAILABILITY_ENTITY = "Availability";
+    public static String CONTACT_FORM_ENTITY = "ContactForm";
+
     @Autowired
     private DatastoreService datastoreService;
+
     @Autowired
     private DayAvailabilityMapper dayAvailabilityMapper;
+
     @Autowired
     private CurrentDate currentDate;
-    public static String AVAILABILITY_ENTITY = "Availability";
+
+    @Autowired
+    private ContactFormMapper contactFormMapper;
 
     public Availabilities get() {
         Availabilities availabilities = new Availabilities();
-        this.datastoreService.prepare((new Query(AVAILABILITY_ENTITY)).setFilter(new FilterPredicate("year", FilterOperator.GREATER_THAN_OR_EQUAL, this.currentDate.year()))).asList(Builder.withDefaults()).stream().forEach((entity) -> {
-            availabilities.add(NumberOfDays.valueOf((String)entity.getProperty("numberOfDays")), ((Long)entity.getProperty("year")).intValue(), ((Long)entity.getProperty("month")).intValue(), ((Long)entity.getProperty("day")).intValue(), ((Long)entity.getProperty("availability")).intValue());
-        });
+        this.datastoreService.prepare((new Query(AVAILABILITY_ENTITY)).setFilter(
+                new FilterPredicate("year", FilterOperator.GREATER_THAN_OR_EQUAL, this.currentDate.year())))
+                .asList(Builder.withDefaults())
+                .forEach((entity) -> availabilities.add(NumberOfDays.valueOf((String)entity.getProperty("numberOfDays")), ((Long)entity.getProperty("year")).intValue(), ((Long)entity.getProperty("month")).intValue(), ((Long)entity.getProperty("day")).intValue(), ((Long)entity.getProperty("availability")).intValue()));
+
         return availabilities;
     }
 
     public void put(int year, int month, int day, NumberOfDays numberOfDays, int availability) {
-        this.datastoreService.put(this.dayAvailabilityMapper.map(year, month, day, numberOfDays, availability));
+        datastoreService.put(dayAvailabilityMapper.map(year, month, day, numberOfDays, availability));
     }
 
     public void delete() {
-        List<Key> keys = this.datastoreService
+        List<Key> keys = datastoreService
                 .prepare((new Query(AVAILABILITY_ENTITY)).setKeysOnly())
                 .asList(Builder.withDefaults())
                 .stream()
                 .map(Entity::getKey)
                 .collect(Collectors.toList());
 
-        this.datastoreService.delete(keys);
+        datastoreService.delete(keys);
     }
 
     public void put(ContactForm contactForm) {
-
+        datastoreService.put(contactFormMapper.map(contactForm));
     }
 }
