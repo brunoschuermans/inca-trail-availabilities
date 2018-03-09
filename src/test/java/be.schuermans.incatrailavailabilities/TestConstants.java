@@ -4,8 +4,6 @@ import be.schuermans.incatrailavailabilities.booking.BookingForm;
 import be.schuermans.incatrailavailabilities.booking.TravellerForm;
 import be.schuermans.incatrailavailabilities.contact.ContactForm;
 
-import java.util.Date;
-
 import static be.schuermans.incatrailavailabilities.KnowUsFrom.GOOGLE;
 import static be.schuermans.incatrailavailabilities.booking.BookingForm.Tour.INCA_TRAIL_CLASSIC;
 import static be.schuermans.incatrailavailabilities.booking.BookingForm.TourType.PRIVATE;
