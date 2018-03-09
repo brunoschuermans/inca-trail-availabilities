@@ -7,11 +7,6 @@ package be.schuermans.incatrailavailabilities;
 
 import be.schuermans.incatrailavailabilities.appengine.Datastore;
 import com.google.api.client.util.Throwables;
-
-import java.util.stream.IntStream;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.DomSerializer;
 import org.htmlcleaner.HtmlCleaner;
@@ -20,6 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+import java.util.stream.IntStream;
 
 @Component
 public class MonthAvailabilityParser {

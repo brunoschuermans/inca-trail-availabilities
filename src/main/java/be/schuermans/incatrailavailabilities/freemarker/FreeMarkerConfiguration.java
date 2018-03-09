@@ -11,12 +11,18 @@ public class FreeMarkerConfiguration {
 
     @Bean
     freemarker.template.Configuration configuration() {
-        return new freemarker.template.Configuration();
+        freemarker.template.Configuration configuration = new freemarker.template.Configuration();
+        configuration.setClassForTemplateLoading(this.getClass(), "/");
+        return configuration;
     }
 
-    @Bean
+    @Bean(name = "contactFormEmailTemplate")
     Template contactFormEmailTemplate(freemarker.template.Configuration configuration) throws IOException {
-        configuration.setClassForTemplateLoading(this.getClass(), "/");
         return configuration.getTemplate("ContactFormEmail.ftl");
+    }
+
+    @Bean(name = "bookingFormEmailTemplate")
+    Template bookingFormEmailTemplate(freemarker.template.Configuration configuration) throws IOException {
+        return configuration.getTemplate("BookingFormEmail.ftl");
     }
 }

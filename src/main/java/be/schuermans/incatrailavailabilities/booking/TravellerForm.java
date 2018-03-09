@@ -1,6 +1,5 @@
-package be.schuermans.incatrailavailabilities.contact;
+package be.schuermans.incatrailavailabilities.booking;
 
-import be.schuermans.incatrailavailabilities.KnowUsFrom;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,14 +11,17 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactForm {
+public class TravellerForm {
 
     @NotNull
-    private String name;
+    private String firstName;
     @NotNull
-    private String email;
+    private String lastName;
     @NotNull
-    private KnowUsFrom knowUsFrom;
+    private String passport;
     @NotNull
-    private String message;
+    private String nationality;
+    @NotNull
+    private String birthDate;
+
 }

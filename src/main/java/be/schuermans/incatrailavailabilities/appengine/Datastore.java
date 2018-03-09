@@ -8,25 +8,29 @@ package be.schuermans.incatrailavailabilities.appengine;
 import be.schuermans.incatrailavailabilities.Availabilities;
 import be.schuermans.incatrailavailabilities.CurrentDate;
 import be.schuermans.incatrailavailabilities.NumberOfDays;
+import be.schuermans.incatrailavailabilities.booking.BookingForm;
+import be.schuermans.incatrailavailabilities.booking.BookingFormMapper;
 import be.schuermans.incatrailavailabilities.contact.ContactForm;
 import be.schuermans.incatrailavailabilities.contact.ContactFormMapper;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions.Builder;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.FetchOptions.Builder;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class Datastore {
 
     public static String AVAILABILITY_ENTITY = "Availability";
     public static String CONTACT_FORM_ENTITY = "ContactForm";
+    public static String BOOKING_FORM_ENTITY = "BookingForm";
 
     @Autowired
     private DatastoreService datastoreService;
@@ -39,6 +43,9 @@ public class Datastore {
 
     @Autowired
     private ContactFormMapper contactFormMapper;
+
+    @Autowired
+    private BookingFormMapper bookingFormMapper;
 
     public Availabilities get() {
         Availabilities availabilities = new Availabilities();
@@ -67,5 +74,9 @@ public class Datastore {
 
     public void put(ContactForm contactForm) {
         datastoreService.put(contactFormMapper.map(contactForm));
+    }
+
+    public void put(BookingForm bookingForm) {
+        datastoreService.put(bookingFormMapper.map(bookingForm));
     }
 }

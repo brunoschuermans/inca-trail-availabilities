@@ -17,6 +17,7 @@ public class ContactFormMapper {
         Entity entity = new Entity(CONTACT_FORM_ENTITY);
         entity.setProperty("name", contactForm.getName());
         entity.setProperty("email", contactForm.getEmail());
+        entity.setProperty("knowUsFrom", contactForm.getKnowUsFrom().name());
         entity.setProperty("message", contactForm.getMessage());
 
         return entity;

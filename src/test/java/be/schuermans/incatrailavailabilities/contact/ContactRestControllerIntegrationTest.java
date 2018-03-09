@@ -1,7 +1,5 @@
 package be.schuermans.incatrailavailabilities.contact;
 
-import be.schuermans.incatrailavailabilities.IncaTrailAvailabilitiesApplication;
-import freemarker.template.Template;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 @WebAppConfiguration
-public class ContactControllerIntegrationTest {
+public class ContactRestControllerIntegrationTest {
 
     @Autowired
     WebApplicationContext context;

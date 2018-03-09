@@ -1,4 +1,4 @@
-package be.schuermans.incatrailavailabilities.contact;
+package be.schuermans.incatrailavailabilities.booking;
 
 import be.schuermans.incatrailavailabilities.appengine.Datastore;
 import com.google.appengine.api.mail.MailService;
@@ -9,16 +9,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static be.schuermans.incatrailavailabilities.TestConstants.CONTACT_FORM;
+import static be.schuermans.incatrailavailabilities.TestConstants.BOOKING_FORM;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.refEq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ContactControllerTest {
+public class BookingRestControllerTest {
 
     @InjectMocks
-    ContactController contactController = new ContactController();
+    BookingRestController bookingRestController = new BookingRestController();
 
     @Mock
     Datastore datastore;
@@ -31,9 +31,9 @@ public class ContactControllerTest {
 
     @Test
     public void postContact() throws Exception {
-        contactController.postContact(CONTACT_FORM);
+        bookingRestController.postContact(BOOKING_FORM);
 
-        verify(datastore).put(refEq(CONTACT_FORM));
+        verify(datastore).put(refEq(BOOKING_FORM));
         verify(mailService).send(any(MailService.Message.class));
     }
 }
