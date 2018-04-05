@@ -1,9 +1,12 @@
 package be.schuermans.incatrailavailabilities.contact;
 
 import be.schuermans.incatrailavailabilities.appengine.Datastore;
+import be.schuermans.incatrailavailabilities.booking.BookingForm;
 import com.google.appengine.api.mail.MailService;
+import com.google.common.collect.ImmutableMap;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang3.text.StrSubstitutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,7 +26,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 @CrossOrigin
 public class ContactRestController {
 
-    private static final String SUBJECT = "Contact Form Request";
+    private static final String SUBJECT = "Contact Form Request: ${name}";
 
     @Autowired
     private Datastore datastore;
@@ -39,7 +42,7 @@ public class ContactRestController {
     public void postContact(@RequestBody @Valid ContactForm contactForm) throws Exception {
         datastore.put(contactForm);
 
-        MailService.Message message = new MailService.Message(FROM, TO, SUBJECT, EMPTY);
+        MailService.Message message = new MailService.Message(FROM, TO, subject(contactForm), EMPTY);
         message.setHtmlBody(contactFormEmailTemplate(contactForm));
         message.setReplyTo(contactForm.getEmail());
         mailService.send(message);
@@ -50,4 +53,15 @@ public class ContactRestController {
         contactFormEmailTemplate.process(contactForm, stringWriter);
         return stringWriter.toString();
     }
+
+    private String subject(ContactForm contactForm) {
+        return new StrSubstitutor(variables(contactForm)).replace(SUBJECT);
+    }
+
+    private ImmutableMap<String, String> variables(ContactForm contactForm) {
+        return ImmutableMap.<String, String>builder()
+                .put("name", contactForm.getName())
+                .build();
+    }
+
 }

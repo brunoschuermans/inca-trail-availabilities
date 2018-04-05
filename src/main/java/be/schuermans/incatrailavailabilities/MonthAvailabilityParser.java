@@ -23,6 +23,7 @@ import java.util.stream.IntStream;
 
 @Component
 public class MonthAvailabilityParser {
+
     @Autowired
     private MonthAvailabilityGateway gateway;
     @Autowired

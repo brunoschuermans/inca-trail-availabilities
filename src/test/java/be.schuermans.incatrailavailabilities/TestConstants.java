@@ -13,7 +13,7 @@ public interface TestConstants {
 
     String EMAIL = "john@gmail.com";
     String MESSAGE = "message";
-    String NAME = "NAME";
+    String NAME = "John Doe";
     ContactForm CONTACT_FORM = ContactForm.builder()
             .name(NAME)
             .email(EMAIL)

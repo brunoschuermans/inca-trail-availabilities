@@ -22,15 +22,15 @@ public class BookingForm {
 
     public enum Tour {
 
-        INCA_TRAIL_ULTIMATE("Ultimate Inca Trail 8D/7N"),
-        INCA_TRAIL_TRAILBLAZING("Trailblazing Inca Trail 5D/4N"),
+        INCA_TRAIL_ULTIMATE("Inca Trail 8D/7N"),
+        INCA_TRAIL_TRAILBLAZING("Inca Trail 5D/4N"),
         INCA_TRAIL_CLASSIC("Classic Inca Trail 4D/3N"),
-        INCA_TRAIL_TASTE("A Taste of Inca Trail 2D/1N"),
+        INCA_TRAIL_TASTE("Short Inca Trail 2D/1N"),
         BEST_OF_PERU("The Best of Peru 12D/11N"),
         TAMBOPATA_JUNGLE("Tambopata Jungle 4D/3N"),
         SALKANTAY("Salkantay Trek 5D/4N"),
         LARES("Lares Trek 4D/3N"),
-        EXTREME_ADVENTURE("Extreme Adventure to Machu Picchu 4D/3N"),
+        EXTREME_ADVENTURE("Inca Jungle Trek to Machu Picchu 4D/3N"),
         CHOQUEQUIRAO("Choquequirao Trek 5D/4N"),
         AUSANGATE("Ausangate Trek 5D/4N");
 
