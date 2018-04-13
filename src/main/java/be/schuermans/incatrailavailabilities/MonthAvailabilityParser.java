@@ -37,16 +37,18 @@ public class MonthAvailabilityParser {
             TagNode tagNode = (new HtmlCleaner()).clean(this.gateway.post(year, month, numberOfDays.getValue()));
             Document doc = (new DomSerializer(new CleanerProperties())).createDOM(tagNode);
             XPath xpath = XPathFactory.newInstance().newXPath();
-            NodeList nodeList = (NodeList)xpath.evaluate("//div[@class='it-number']", doc, XPathConstants.NODESET);
+            NodeList nodeList = (NodeList) xpath.evaluate("//div[@class='it-number']", doc, XPathConstants.NODESET);
             IntStream.range(0, nodeList.getLength()).forEach((i) -> {
-                this.datastore.put(year, month, i + 1, numberOfDays, Integer.parseInt(this.availability(nodeList, i)));
+                this.datastore.put(year, month, i + 1, numberOfDays, Integer.parseInt(this.availability(nodeList, year, i)));
             });
         } catch (Exception var8) {
             throw Throwables.propagate(var8);
         }
     }
 
-    private String availability(NodeList nodeList, int i) {
-        return nodeList.item(i).getTextContent().isEmpty() ? "0" : nodeList.item(i).getTextContent();
+    private String availability(NodeList nodeList, int year, int i) {
+        return nodeList.item(i).getTextContent().isEmpty()
+                ? year == 2019 ? "500" : "0"
+                : nodeList.item(i).getTextContent();
     }
 }
